@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import NavBar from "components/common/navbar/NavBar";
+import NavBar from "components/common/navBar/NavBar.vue";
 import HomeSwiper from "./childComps/HomeSwiper.vue";
 import RecommendView from "./childComps/RecommendView.vue";
 import { getHomeMultidata, getHomeGoods } from "network/home";
