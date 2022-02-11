@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper" ref="aaaa">
     <ul class="content">
-        <button>按钮</button>
+      <button @click="btnClick">按钮</button>
       <li>list1</li>
       <li>list2</li>
       <li>list3</li>
@@ -107,7 +107,7 @@
 </template>
 
 <script>
-import BScroll from 'better-scroll';
+import BScroll from "better-scroll";
 
 export default {
   name: "Category",
@@ -121,34 +121,35 @@ export default {
   destroyed() {},
   activated() {},
   deactivated() {},
-  created() {
-  },
+  created() {},
 
   //组件创建完后调用
   //probeType 侦测当前位置 0和1不侦测 2在手指滚动中侦测，惯性过程不再侦测
   //3：只要是滚动，都侦测
   mounted() {
-        this.scroll = new BScroll(this.$refs.aaaa,{
-            probeType:3,
-            click:true,
-            pullUpLoad:true
-        });
+    this.scroll = new BScroll(this.$refs.aaaa, {
+      probeType: 3,
+      click: true,
+      pullUpLoad: true,
+    });
 
-        this.scroll.on('scroll',(position)=>{
-        })
+    this.scroll.on("scroll", (position) => {});
 
-        this.scroll.on('pullingUp',()=>{
-            console.log('上拉加载更多');
+    this.scroll.on("pullingUp", () => {
+      console.log("上拉加载更多");
 
-            //发送网络请求，请求更多页数据
-            //登数据请求完成，并且将新的数据展示出来后
-            setTimeout(() => {
-                this.scroll.finishPullUp()
-            }, 2000);
-            
-        })
+      //发送网络请求，请求更多页数据
+      //登数据请求完成，并且将新的数据展示出来后
+      setTimeout(() => {
+        this.scroll.finishPullUp();
+      }, 2000);
+    });
   },
-  methods: {},
+  methods: {
+    btnClick() {
+      console.log("btnClick");
+    },
+  },
 };
 </script>
 

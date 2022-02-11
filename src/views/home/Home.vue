@@ -38,6 +38,8 @@ import GoodsList from "components/content/goods/GoodsList.vue";
 
 import { getHomeMultidata, getHomeGoods } from "network/home";
 
+import BScroll from 'better-scroll'
+
 export default {
   name: "Home",
   components: {
