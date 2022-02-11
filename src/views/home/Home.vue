@@ -5,8 +5,25 @@
     <recommend-view :recommends="recommends"></recommend-view>
     <feature-view />
 
-    <tab-control class="tab-control" :titles="['流行', '新款', '精选']" />
-    <goods-list :goods="goods['pop'].list"/>
+    <tab-control
+      class="tab-control"
+      :titles="['流行', '新款', '精选']"
+      @tabClick="tabClick"
+    />
+    <goods-list :goods="showGoods" />
+
+    <ul>
+      <li>list</li>
+      <li>list</li>
+      <li>list</li>
+      <li>list</li>
+      <li>list</li>
+      <li>list</li>
+      <li>list</li>
+      <li>list</li>
+      <li>list</li>
+      <li>list</li>
+    </ul>
   </div>
 </template>
 
@@ -17,7 +34,7 @@ import FeatureView from "./childComps/FeatureView.vue";
 
 import TabControl from "components/content/tabControl/TabControl.vue";
 import NavBar from "components/common/navBar/NavBar.vue";
-import GoodsList from 'components/content/goods/GoodsList.vue'
+import GoodsList from "components/content/goods/GoodsList.vue";
 
 import { getHomeMultidata, getHomeGoods } from "network/home";
 
@@ -40,20 +57,41 @@ export default {
         new: { page: 0, list: [] },
         sell: { page: 0, list: [] },
       },
+      currentType:'pop'
     };
   },
-  computed: {},
+  computed: {
+    showGoods(){
+      return this.goods[this.currentType].list
+    }
+  },
   destroyed() {},
   activated() {},
   deactivated() {},
   created() {
     this.getHomeMutidata();
-    this.getHomeGoods('pop');
-    this.getHomeGoods('new');
-    this.getHomeGoods('sell');
+    this.getHomeGoods("pop");
+    this.getHomeGoods("new");
+    this.getHomeGoods("sell");
   },
   mounted() {},
   methods: {
+    /**
+        事件监听相关方法
+     */
+     tabClick(index){
+       switch(index){
+         case 0 : this.currentType = 'pop'; break
+         case 1 : this.currentType = 'new'; break
+         case 2 : this.currentType = 'sell'; break
+         default:
+       }
+     },
+
+
+    /**
+     * 网络请求相关方法
+     */
     getHomeMutidata() {
       getHomeMultidata().then((res) => {
         this.banners = res.data.banner.list;
@@ -63,9 +101,8 @@ export default {
     getHomeGoods(type) {
       const page = this.goods[type].page + 1;
       getHomeGoods(type, page).then((res) => {
-        this.goods[type].list.push(...res.data.list)
-        this.goods[type].page += 1
-        console.log(this.goods[type].list);
+        this.goods[type].list.push(...res.data.list);
+        this.goods[type].page += 1;
       });
     },
   },
