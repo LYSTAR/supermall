@@ -15,7 +15,7 @@
       <feature-view />
 
       <tab-control
-        class="tab-control"
+        ref="tabControl"
         :titles="['流行', '新款', '精选']"
         @tabClick="tabClick"
       />
@@ -64,6 +64,7 @@ export default {
       },
       currentType: "pop",
       isShowBackTop: false,
+      tabOffsetTop: 0,
     };
   },
   computed: {
@@ -75,12 +76,29 @@ export default {
   activated() {},
   deactivated() {},
   created() {
+    //1.请求多个数据
     this.getHomeMutidata();
+
+    //2.请求商品数据
     this.getHomeGoods("pop");
     this.getHomeGoods("new");
     this.getHomeGoods("sell");
+
+    //3.赋值
+    this.tabOffsetTop = this.$refs.tabControl;
   },
-  mounted() {},
+  mounted() {
+    //1.图片加载完成的事件监听
+    const refresh = debounce(this.$$refs.scroll.refresh, 50);
+    this.$bus.$on("itemImageLoad", () => {
+      refresh();
+    });
+
+    //2.获取tabControl的offsetTop
+    //所有的组件都有一个属性 $el:用于获取组件中的元素
+    this.tabOffsetTop = this.$refs.tabControl.$el.offsetTop;
+
+  },
   methods: {
     /**
         事件监听相关方法
@@ -102,6 +120,8 @@ export default {
 
     loadMore() {
       this.getHomeGoods(this.currentType);
+
+      this.$refs.scroll.scroll.refresh();
     },
 
     backClick() {
@@ -140,7 +160,7 @@ export default {
 <style scoped>
 /** vh->viewport height */
 #home {
-  /*padding-top: 44px;*/
+  padding-top: 44px;
   height: 100vh;
 }
 
@@ -156,12 +176,6 @@ export default {
   z-index: 9;
 }
 
-.tab-control {
-  position: sticky;
-  top: 44px;
-  z-index: 9;
-}
-
 /* .content {
   overflow: hidden;
   position: absolute;
@@ -172,8 +186,7 @@ export default {
 } */
 
 .content {
-  height: calc(100% - 93px);
+  height: calc(100% - 44px);
   overflow: hidden;
-  margin-top: 44px;
 }
 </style>
