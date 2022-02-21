@@ -36,6 +36,9 @@ export default {
     scrollTo(x, y, time = 300) {
       this.scroll.scrollTo(x, y, time);
     },
+    finishPullUp(){
+      this.scroll.finishPullUp()
+    }
   },
   mounted() {
     // 1.创建BScorll对象
