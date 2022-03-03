@@ -34,11 +34,17 @@ export default {
   },
   methods: {
     scrollTo(x, y, time = 300) {
-      this.scroll.scrollTo(x, y, time);
+      this.scroll && this.scroll.scrollTo(x, y, time);
     },
-    finishPullUp(){
-      this.scroll.finishPullUp()
-    }
+    finishPullUp() {
+      this.scroll.finishPullUp();
+    },
+    refresh() {
+      this.scroll && this.scroll.refresh();
+    },
+    getScrollY() {
+      return this.scroll ? this.scroll.y : 0;
+    },
   },
   mounted() {
     // 1.创建BScorll对象
@@ -49,14 +55,19 @@ export default {
     });
 
     //2.监听滚动的为位置
-    this.scroll.on("scroll", (position) => {
-      this.$emit("scroll", position);
-    });
+    if (this.probeType === 2 || this.probeType === 3) {
+      this.scroll.on("scroll", (position) => {
+        // console.log(position);
+        this.$emit("scroll", position);
+      });
+    }
 
     //3.监听上拉事件
-    this.scroll.on('pullingUp',()=>{
-      this.$emit('pullingUp')
-    })
+    if (this.pullUpLoad) {
+      this.scroll.on("pullingUp", () => {
+        this.$emit("pullingUp");
+      });
+    }
   },
 };
 </script>
