@@ -1,9 +1,12 @@
 <template>
   <div id="detail">
-    <detail-nav-bar />
-    <detail-swiper :top-images="topImages" />
-    <detail-base-info :goods="goods" />
-    <detail-shop-info :shop="shop" />
+    <detail-nav-bar class="detail-nav" />
+    <scroll class="content" ref="scroll">
+      <detail-swiper :top-images="topImages" />
+      <detail-base-info :goods="goods" />
+      <detail-shop-info :shop="shop" />
+      <detail-goods-info :detail-info="detailInfo" />
+    </scroll>
   </div>
 </template>
 
@@ -12,8 +15,11 @@ import DetailNavBar from "./childComps/DetailNavBar";
 import DetailSwiper from "./childComps/DetailSwiper";
 import DetailBaseInfo from "./childComps/DetailBaseInfo";
 import DetailShopInfo from "./childComps/DetailShopInfo";
+import DetailGoodsInfo from "./childComps/DetailGoodsInfo";
 
-import { getDetail, Goods, Shop } from "network/detail";
+import Scroll from "components/common/scroll/Scroll";
+
+import { getDetail, Goods, Shop, GoodsParam } from "network/detail";
 
 export default {
   name: "Detail",
@@ -22,6 +28,8 @@ export default {
     DetailSwiper,
     DetailBaseInfo,
     DetailShopInfo,
+    DetailGoodsInfo,
+    Scroll,
   },
   data() {
     return {
@@ -29,6 +37,8 @@ export default {
       topImages: [],
       goods: {},
       shop: {},
+      detailInfo: {},
+      paramInfo: {},
     };
   },
   computed: {},
@@ -42,6 +52,8 @@ export default {
     //2.根据iid请求详情数据
     getDetail(this.iid).then((res) => {
       const data = res.result;
+
+      //console.log(data);
       //1.获取顶部的图片轮播图数据
       this.topImages = data.itemInfo.topImages;
 
@@ -54,6 +66,15 @@ export default {
 
       //3.创建店铺信息
       this.shop = new Shop(data.shopInfo);
+
+      //4.获取商品详细信息
+      this.detailInfo = data.detailInfo;
+
+      //5.保存参数信息
+      this.paramInfo = new GoodsParam(
+        data.itemParams.info,
+        data.itemParams.rule
+      );
     });
   },
   mounted() {},
@@ -66,4 +87,20 @@ export default {
 </script>
 
 <style scoped>
+#detail {
+  position: relative;
+  z-index: 9;
+  background-color: #fff;
+  height: 100vh;
+}
+
+.detail-nav {
+  position: relative;
+  z-index: 9;
+  background-color: #fff;
+}
+
+.content {
+  height: calc(100% - 44px);
+}
 </style>

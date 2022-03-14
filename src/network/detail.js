@@ -33,6 +33,10 @@ export class Shop{
     }
 }
 
+export class GoodsParam{
+    
+}
+
 
 // class Person{
 //     constructor(name,age){

@@ -142,7 +142,7 @@ export default {
     this.scroll.on("scroll", (position) => {});
 
     this.scroll.on("pullingUp", () => {
-      console.log("上拉加载更多");
+      //console.log("上拉加载更多");
 
       //发送网络请求，请求更多页数据
       //登数据请求完成，并且将新的数据展示出来后
@@ -153,7 +153,6 @@ export default {
   },
   methods: {
     btnClick() {
-      console.log("btnClick");
     },
   },
 };

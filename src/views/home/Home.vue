@@ -92,7 +92,6 @@ export default {
     this.saveY = this.$refs.scroll.getScrollY();
   },
   created() {
-    console.log("created");
     //1.请求多个数据
     this.getHomeMutidata();
 
