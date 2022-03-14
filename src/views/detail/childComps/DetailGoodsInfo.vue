@@ -39,12 +39,17 @@ export default {
 
   methods: {
     imgLoad() {
-      //判断回调
+      //判断所有的图片都加载完，进行一次回调
       if (++this.counter === this.imagesLength) {
+        this.$emit('imageLoad');
       }
     },
   },
-
+  watch:{
+    detailInfo(){
+      this.imagesLength = this.detailInfo.detailImage[0].list.length
+    }
+  },
   created() {},
 };
 </script>
