@@ -19,29 +19,29 @@ const routes = [
   {
     path: '/home',
     component: Home,
-    meta:{
-      showTab:true
+    meta: {
+      showTab: true
     }
   },
   {
     path: '/category',
     component: Category,
-    meta:{
-      showTab:true
+    meta: {
+      showTab: true
     }
   },
   {
     path: '/cart',
     component: Cart,
-    meta:{
-      showTab:true
+    meta: {
+      showTab: true
     }
   },
   {
     path: '/profile',
     component: Profile,
-    meta:{
-      showTab:true
+    meta: {
+      showTab: true
     }
   },
   {

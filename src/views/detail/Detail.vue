@@ -7,6 +7,8 @@
       <detail-shop-info :shop="shop" />
       <detail-goods-info :detail-info="detailInfo" @imageLoad="imageLoad" />
       <detail-param-info :param-info="paramInfo" />
+      <detail-comment-info :comment-info="commentInfo" />
+      <goods-list :goods="recommends"/>
     </scroll>
   </div>
 </template>
@@ -18,10 +20,20 @@ import DetailBaseInfo from "./childComps/DetailBaseInfo";
 import DetailShopInfo from "./childComps/DetailShopInfo";
 import DetailGoodsInfo from "./childComps/DetailGoodsInfo";
 import DetailParamInfo from "./childComps/DetailParamInfo";
+import DetailCommentInfo from "./childComps/DetailCommentInfo";
 
 import Scroll from "components/common/scroll/Scroll";
 
-import { getDetail, Goods, Shop, GoodsParam } from "network/detail";
+import GoodsList from 'components/content/goods/GoodsList'
+
+
+import {
+  getDetail,
+  Goods,
+  Shop,
+  GoodsParam,
+  getRecommend,
+} from "network/detail";
 
 export default {
   name: "Detail",
@@ -32,7 +44,9 @@ export default {
     DetailShopInfo,
     DetailGoodsInfo,
     DetailParamInfo,
-    Scroll
+    DetailCommentInfo,
+    Scroll,
+    GoodsList
   },
   data() {
     return {
@@ -42,6 +56,8 @@ export default {
       shop: {},
       detailInfo: {},
       paramInfo: {},
+      commentInfo: {},
+      recommends:[]
     };
   },
   computed: {},
@@ -55,7 +71,7 @@ export default {
     //2.根据iid请求详情数据
     getDetail(this.iid).then((res) => {
       const data = res.result;
-
+      console.log(data);
       //console.log(data);
       //1.获取顶部的图片轮播图数据
       this.topImages = data.itemInfo.topImages;
@@ -78,9 +94,20 @@ export default {
         data.itemParams.info,
         data.itemParams.rule
       );
+
+      //6.取出评论信息
+      if (data.rate.cRate !== 0) {
+        this.commentInfo = data.rate.list[0];
+      }
+    });
+
+    //3.请求推荐数据
+    getRecommend().then((res) => {
+      this.recommends = res.data.list
     });
   },
   mounted() {},
+  updated() {},
   methods: {
     imageLoad() {
       this.$refs.scroll.refresh();

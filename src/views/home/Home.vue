@@ -16,11 +16,8 @@
       @pullingUp="loadMore"
       :pull-up-load="true"
     >
-      <home-swiper
-        :banners="banners"
-        @swiperImageLoad="swiperImageLoad"
-      ></home-swiper>
-      <recommend-view :recommends="recommends"></recommend-view>
+      <home-swiper :banners="banners" @swiperImageLoad="swiperImageLoad" />
+      <recommend-view :recommends="recommends" />
       <feature-view />
 
       <tab-control
@@ -49,6 +46,7 @@ import { getHomeMultidata, getHomeGoods } from "network/home";
 
 import Scroll from "components/common/scroll/Scroll.vue";
 import BackTop from "components/content/backTop/BackTop";
+import { debounce } from "common/utils";
 
 export default {
   name: "Home",
@@ -83,7 +81,6 @@ export default {
       return this.goods[this.currentType].list;
     },
   },
-  destroyed() {},
   activated() {
     this.$refs.scroll.scrollTo(0, this.saveY, 0);
     this.$refs.scroll.refresh();
@@ -105,10 +102,10 @@ export default {
   },
   mounted() {
     //1.图片加载完成的事件监听
-    // const refresh = debounce(this.$$refs.scroll.refresh, 50);
-    // this.$bus.$on("itemImageLoad", () => {
-    //   refresh();
-    // });
+    const refresh = debounce(this.$refs.scroll.refresh, 50);
+    this.$bus.$on("itemImageLoad", () => {
+      refresh();
+    });
   },
   methods: {
     /**

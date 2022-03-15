@@ -22,8 +22,8 @@ export class Goods {
     }
 }
 
-export class Shop{
-    constructor(shopInfo){
+export class Shop {
+    constructor(shopInfo) {
         this.logo = shopInfo.shopLogo;
         this.name = shopInfo.name;
         this.fans = shopInfo.cFans;
@@ -33,15 +33,20 @@ export class Shop{
     }
 }
 
-export class GoodsParam{
-    constructor(info,rule){
+export class GoodsParam {
+    constructor(info, rule) {
         //注：image可能没有值(某些商品有值，某些没有值)
-        this.image = info.images ? info.images[0]:'';
+        this.image = info.images ? info.images[0] : '';
         this.infos = info.set;
         this.sizes = rule.tables;
     }
 }
 
+export function getRecommend() {
+    return request({
+        url: '/recommend'
+    })
+}
 
 // class Person{
 //     constructor(name,age){

@@ -55,15 +55,19 @@ export default {
   border-bottom: 1px solid rgba(100, 100, 100, 0.1);
 }
 
-.info-param{
-    border-top: 1px solid rgba(0,0,0,.1);
+.info-param-key {
+  width: 95px;
 }
 
-.param-value{
-    color:#eb4868
+.info-param {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.info-img img{
-    width: 100%;
+.param-value {
+  color: #eb4868;
+}
+
+.info-img img {
+  width: 100%;
 }
 </style>
