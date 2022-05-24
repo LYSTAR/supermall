@@ -1,0 +1,14 @@
+div{
+    width: 1200px;
+    height: 500px;
+    border: 2px solid;
+    background-image: url("../imgs/starcraft.jpg");
+    background-repeat: no-repeat;
+    background-size: 400px 200px;
+    background-position: right top;
+}
+
+/* body{
+    background-image: url("../imgs/Target.ico");
+    background-repeat: repeat;
+} */

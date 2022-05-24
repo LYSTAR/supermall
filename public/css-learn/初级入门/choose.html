@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="">
+
+    <style>
+        /* 属性选择器 */
+        /* [href]{
+            color:red
+        } */
+
+        /* [href$="baidu.com"]{
+            color: #008c8c;
+        } */
+
+        /* 选中鼠标悬停时的a元素 */
+        /* :hover{
+            color:blue
+        } */
+
+        /* 鼠标按下时的a元素 */
+        /* a:active {
+            color: blue;
+        } */
+
+        /* link:超链接未访问过的状态 */
+        /* a:link {
+            color: chocolate
+        } */
+
+        /* visited:超链接已经访问过的状态 */
+        /* a:visited{
+            color: rgb(113,133,0);
+        } */
+
+        /* 生成并选中某个元素内部的第一个子元素或最后一个子元素 */
+
+        /* span::before{
+            content:"《"
+        }
+
+        span::after{
+            content: "》";
+        } */
+
+        /* p {
+            text-indent: 2em;
+            line-height: 2;
+        }
+
+        p.red {
+            color: red
+        }
+
+        选择子类元素
+        .red li {
+            color: #008c8c
+        } */
+
+        /* 选择下一级元素 */
+        /* .abc>.bcd{
+            color: red;
+        } */
+
+        /* div>ul li{
+            color: red;
+        } */
+
+        .special {
+            color: red;
+        }
+
+
+        /* 相邻兄弟元素 */
+
+        /* .special+li{
+            color: #008c8c;
+        } */
+
+        /* 后面出现的所有兄弟元素 */
+        /* .special~li{
+            color: #008c8c;
+        } */
+
+        /* 多个选择器，用逗号分隔 */
+        .special~li,
+        p {
+            color: #008c8c;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <a href="https://www.baidu.com">百度</a>
+    <a href="https://www.sina.com.cn">新浪</a>
+    <a href="https://www.douyu.com">斗鱼</a>
+
+    <p>
+        <span>HTML和CSS</span>
+    </p> -->
+
+    <!-- <ul>
+        <li>Lorem.</li>
+        <li>Tempore!</li>
+        <li>At?</li>
+        <li>Provident.</li>
+        <li>Fugiat!</li>
+    </ul>
+
+    <div class="red">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sit dolores tempore error, temporibus reprehenderit nobis! Explicabo, ducimus nihil cumque voluptate iusto, alias vel necessitatibus in autem eius reprehenderit eligendi?
+        <ul>
+            <li>Lorem.</li>
+            <li>Tempore!</li>
+            <li>At?</li>
+            <li>Provident.</li>
+            <li>Fugiat!</li>
+        </ul>
+    </div> -->
+
+    <!-- <div class="abc">
+        <p>Lorem.</p>
+        <p class="bcd">Aliquam.</p>
+        <p>Laboriosam.</p>
+    </div>
+
+    <p class="bcd">Lorem.</p> -->
+
+    <div>
+        <ul>
+            <li>Lorem.</li>
+            <li>Cupiditate?</li>
+            <li>Natus?</li>
+            <li class="special">Non!</li>
+            <li>Officia?</li>
+            <li>Nulla!</li>
+            <li>Nesciunt.</li>
+            <li>Neque.</li>
+            <li>Hic!</li>
+            <li>Illum!</li>
+        </ul>
+    </div>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, rerum veniam. Consequatur fuga deserunt alias
+        saepe quia nesciunt earum eius, asperiores officiis error hic, minima, totam facere suscipit tempora incidunt.
+    </p>
+</body>
+
+</html>
